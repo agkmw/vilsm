@@ -83,7 +83,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function groups(): BelongsToMany
     {
-        return $this->belongsToMany(Group::class);
+        return $this->belongsToMany(Group::class, 'group_user');
     }
 
     public function posts(): HasMany
@@ -106,7 +106,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function follows(): MorphMany
+    public function following(): MorphMany
     {
         return $this->morphMany(Follow::class, 'followable');
     }
@@ -119,5 +119,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function pagesAsAdmin(): BelongsToMany
     {
         return $this->belongsToMany(Page::class, 'page_admin');
+    }
+
+    public function friends(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'friends');
     }
 }

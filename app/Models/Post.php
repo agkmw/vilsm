@@ -18,7 +18,7 @@ class Post extends Model
 
     public function groups(): BelongsToMany
     {
-        return $this->belongsToMany(Group::class);
+        return $this->belongsToMany(Group::class, 'group_post');
     }
 
     public function attachments(): MorphMany
